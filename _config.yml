@@ -1,0 +1,49 @@
+# Basic
+title: Jason Ruan
+subtitle: iOS开发
+welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
+description: 愿我能拥有一个有趣的灵魂.
+creator: <a href="JasonMR7.github.io">@Jaosn Ruan</a>
+
+#url: "http://vno.onevcat.com"
+
+permalink: /:year/:month/:title/
+
+# Format
+highlighter: rouge
+
+# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
+cover_color: red
+
+# The blog button should not be removed.
+blog_button:
+    title: Blog
+    description: Visit blog
+
+# Navigation buttons in the front page.
+nav:
+    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+    # - {title: Another Button, description: A button, url: 'http://example.com'}
+
+# Pagination
+gems: [jekyll-paginate]
+paginate: 10
+paginate_path: "page/:num/"
+
+# Comment
+comment:
+    disqus: vno-jekyll
+    # duoshuo: 
+    
+# Social
+social:
+    #weibo: onevcat
+    github: JasonMR7
+    #twitter: onevcat
+    #gplus: 107108267983477358170
+    mail: yin244654177@gmail.com
+
+# Google Analytics
+ga:
+    # id: your_ga_id
+    # host: your_host
