@@ -1,7 +1,7 @@
 # Basic
 title: Jason Ruan
-subtitle: iOS开发
-welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
+subtitle: 一只iOS开发
+welcome_message: 遇见你很高兴
 description: 愿我能拥有一个有趣的灵魂.
 creator: <a href="JasonMR7.github.io">@Jaosn Ruan</a>
 
@@ -13,7 +13,7 @@ permalink: /:year/:month/:title/
 highlighter: rouge
 
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: red
+cover_color: slate
 
 # The blog button should not be removed.
 blog_button:
@@ -37,7 +37,7 @@ comment:
     
 # Social
 social:
-    #weibo: onevcat
+    weibo: 阮明哲哲哲丶
     github: JasonMR7
     #twitter: onevcat
     #gplus: 107108267983477358170
