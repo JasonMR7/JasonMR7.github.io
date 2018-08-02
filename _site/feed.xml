@@ -5,15 +5,15 @@
     <description>愿我能拥有一个有趣的灵魂.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 02 Aug 2018 17:36:56 +0800</pubDate>
-    <lastBuildDate>Thu, 02 Aug 2018 17:36:56 +0800</lastBuildDate>
+    <pubDate>Thu, 02 Aug 2018 18:23:01 +0800</pubDate>
+    <lastBuildDate>Thu, 02 Aug 2018 18:23:01 +0800</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>UITableView将指定位置滚动至Window键盘上方 - JasonMR7</title>
         <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/tree/master/assets/images/2018-05-11-UITableView根据评论滚动/键盘滚动.gif&quot; alt=&quot;键盘滚动&quot; title=&quot;键盘滚动&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-05-11-UITableView根据评论滚动/键盘滚动.gif&quot; alt=&quot;键盘滚动&quot; title=&quot;键盘滚动&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
 
@@ -86,7 +86,7 @@ CGPoint point = CGPointMake(0, rect.origin.y + rect.size.height);
 - (CGRect)convertRect:(CGRect)rect fromView:(nullable UIView *)view;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;什么意思呢？举个例子：&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/tree/master/assets/images/2018-05-11-UITableView根据评论滚动/坐标转化.png&quot; alt=&quot;坐标转化&quot; title=&quot;坐标转化&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;什么意思呢？举个例子：&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-05-11-UITableView根据评论滚动/坐标转化.png&quot; alt=&quot;坐标转化&quot; title=&quot;坐标转化&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;图中方块的层级关系是这样的：绿色方块在红色方块上，origin为(0,0)；红色方块在蓝色方块上，origin为(100,100)，那么如果将绿色方块直接放到蓝色方块上，并且视觉上位置不发生变化，那么绿色方块的origin应该是多少呢，我们可以直接用上面的convert方法算出来：&lt;/p&gt;
 

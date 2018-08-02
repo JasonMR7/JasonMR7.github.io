@@ -8,7 +8,7 @@ date: 2018-05-11 18:49:00.000000000 +09:00
 
 ## 背景
 
-在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：![键盘滚动](https://github.com/JasonMR7/JasonMR7.github.io/tree/master/assets/images/2018-05-11-UITableView根据评论滚动/键盘滚动.gif "键盘滚动")
+在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：![键盘滚动](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-05-11-UITableView根据评论滚动/键盘滚动.gif "键盘滚动")
 
 
 
@@ -97,7 +97,7 @@ CGPoint point = CGPointMake(0, rect.origin.y + rect.size.height);
 - (CGRect)convertRect:(CGRect)rect fromView:(nullable UIView *)view;
 ```
 
-什么意思呢？举个例子：![坐标转化](https://github.com/JasonMR7/JasonMR7.github.io/tree/master/assets/images/2018-05-11-UITableView根据评论滚动/坐标转化.png "坐标转化")
+什么意思呢？举个例子：![坐标转化](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-05-11-UITableView根据评论滚动/坐标转化.png "坐标转化")
 
 图中方块的层级关系是这样的：绿色方块在红色方块上，origin为(0,0)；红色方块在蓝色方块上，origin为(100,100)，那么如果将绿色方块直接放到蓝色方块上，并且视觉上位置不发生变化，那么绿色方块的origin应该是多少呢，我们可以直接用上面的convert方法算出来：
 
