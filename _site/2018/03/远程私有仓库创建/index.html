@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>远程私有仓库创建 - JasonMR7</title>
+  <meta name="description" content="背景">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="远程私有仓库创建 - JasonMR7">
+  <meta name="twitter:description" content="背景">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="远程私有仓库创建 - JasonMR7">
+  <meta property="og:description" content="背景">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/">
+  <link rel="alternate" type="application/rss+xml" title="Jason Ruan" href="http://localhost:4000/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 Jason Ruan 的主页" class="blog-button"><img src="/assets/images/avatar.jpg" width="80" alt="Jason Ruan logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for Jason Ruan" class="blog-button">Jason Ruan</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">一只iOS开发</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">愿我能拥有一个有趣的灵魂.</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description">遇见你很高兴</p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="Visit blog" class="blog-button">Blog</a></li>
+                
+                  <li class="navigation__item"><a href="http://project.onevcat.com" target="_blank" title="My Projects">Projects</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/阮明哲哲哲丶" title="@阮明哲哲哲丶 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/JasonMR7" title="@JasonMR7 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:yin244654177@gmail.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-slate"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-03-13 17:49:00 +0800" itemprop="datePublished" class="post-meta__date date">2018-03-13</time> &#8226; <span class="post-meta__tags tags"></span>
+    </div>
+    <h1 class="post-title">远程私有仓库创建 - JasonMR7</h1>
+  </header>
+
+  <section class="post">
+    <h2 id="背景">背景</h2>
+
+<p>对于一些自己写的多复用公用组件，或者一些需要二次修改的多复用第三方组件，而这些代码因为某些原因你又不想公开他们，这时我们可以将代码上传到一个固定的私有仓库，通过cocoapods更好的管理他们。</p>
+
+<p>库的选择可以是oschina、github(￥7/month)、公司自己的git服务器等，本文以gitlab为例</p>
+
+<h2 id="正文">正文</h2>
+
+<h3 id="创建私有代码库">创建私有代码库</h3>
+
+<p>进入gitlab创建代码库，如下图</p>
+
+<ul>
+  <li>步骤一：</li>
+</ul>
+
+<p><img src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建1.png" alt="alt" /></p>
+
+<ul>
+  <li>步骤二</li>
+</ul>
+
+<p><img src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建2.png" alt="alt" /></p>
+
+<ul>
+  <li>
+    <p>步骤三</p>
+
+    <p>将仓库克隆到本地，添加<code class="highlighter-rouge">仓库名代码文件夹</code>、<code class="highlighter-rouge">仓库名.podspec</code> 描述文件，最好还有一个<code class="highlighter-rouge">Example</code>工程.如下</p>
+  </li>
+</ul>
+
+<p><img src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建3.png" alt="alt" /></p>
+
+<p>关于.podspec与podfile怎么写，请参考<a href="https://zhenai.lexiangla.com/teams/k100006/docs/c4a84ab4056811e8840a5254004b6d18">cocoapods中Podfile和Podspec的简介</a>,并在Example中本地测试对应的.podspec和Podfile</p>
+
+<ul>
+  <li>
+    <p>步骤四</p>
+
+    <p>测试完成后,git上add,commit,push三连，之后在gitlab上可以看到成品如下图</p>
+  </li>
+</ul>
+
+<p><img src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建4.png" alt="alt" /></p>
+
+<h3 id="创建版本索引库repo">创建版本索引库(repo)</h3>
+
+<p>代码库多了之后， 我们需要一个专门管理所有组件的所有版本的.podspec的仓库</p>
+
+<p>同创建私有代码库步骤一、步骤二创建版本索引库，复制地址，以__http://gitlab.xxxx.com/ios/XXSpec.git__为例</p>
+
+<ul>
+  <li>
+    <p>步骤三</p>
+
+    <p>打开终端，将远程版本索引库添加到本地</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>pod repo add XXSpec http://gitlab.xxxx.com/ios/XXSpec.git 
+</code></pre>
+    </div>
+
+    <p>成功后输入</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>pod repo list
+</code></pre>
+    </div>
+
+    <p>可查看</p>
+  </li>
+</ul>
+
+<h3 id="podspec推送到版本索引库">.podspec推送到版本索引库</h3>
+
+<p>打开终端cd到本地代码库输入，将本地代码库的.podspec推送到版本索引库</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>pod repo push XXCommon.podspec --allow-warnings
+</code></pre>
+</div>
+
+<p>成功后就能直接通过指令搜索到了</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>pod search XXCommon
+</code></pre>
+</div>
+
+<p><img src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建5.png" alt="alt" /></p>
+
+<p>Done!</p>
+
+  </section>
+</article>
+
+<section class="read-more">
+   
+   
+   <div class="read-more-item">
+       <span class="read-more-item-dim">最近的文章</span>
+       <h2 class="post-list__post-title post-title"><a href="/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/" title="link to UITableView将指定位置滚动至Window键盘上方 - JasonMR7">UITableView将指定位置滚动至Window键盘上方 - JasonMR7</a></h2>
+       <p class="excerpt">背景在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：正文我们首先要解决键盘问题，键盘什么时候开始弹起，弹起多高，动画有多久？键盘的几个事件，了解一下？键盘事件// Each notification includes a nil object and a userInfo dictionary containing the// begining and ending keyboard fram...&hellip;</p>
+       <div class="post-list__meta"><time datetime="2018-05-11 17:49:00 +0800" class="post-list__meta--date date">2018-05-11</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/>继续阅读</a></div>
+   </div>
+   
+   
+   
+</section>
+
+<section class="post-comments">
+  
+    <div id="disqus_thread"></div>
+    <script>
+    
+    var disqus_config = function () {
+        this.page.url = "http://localhost:4000/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/";
+        this.page.identifier = "/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/";
+    };
+
+    var disqus_shortname = 'vno-jekyll';
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
+    
+  
+  
+  
+  
+</section>
+
+
+            <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-08-02 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">本站由 <a href="JasonMR7.github.io">@Jaosn Ruan</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2018</span>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+    
+  </body>
+
+</html>

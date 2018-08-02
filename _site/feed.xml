@@ -5,8 +5,8 @@
     <description>愿我能拥有一个有趣的灵魂.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 02 Aug 2018 18:23:01 +0800</pubDate>
-    <lastBuildDate>Thu, 02 Aug 2018 18:23:01 +0800</lastBuildDate>
+    <pubDate>Thu, 02 Aug 2018 19:03:43 +0800</pubDate>
+    <lastBuildDate>Thu, 02 Aug 2018 19:03:43 +0800</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -123,6 +123,105 @@ CGPoint newGreenOrigin = [blueView convertPoint:greenRect.frame.origin fromView:
         <pubDate>Fri, 11 May 2018 17:49:00 +0800</pubDate>
         <link>http://localhost:4000/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/</link>
         <guid isPermaLink="true">http://localhost:4000/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>远程私有仓库创建 - JasonMR7</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;对于一些自己写的多复用公用组件，或者一些需要二次修改的多复用第三方组件，而这些代码因为某些原因你又不想公开他们，这时我们可以将代码上传到一个固定的私有仓库，通过cocoapods更好的管理他们。&lt;/p&gt;
+
+&lt;p&gt;库的选择可以是oschina、github(￥7/month)、公司自己的git服务器等，本文以gitlab为例&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;创建私有代码库&quot;&gt;创建私有代码库&lt;/h3&gt;
+
+&lt;p&gt;进入gitlab创建代码库，如下图&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;步骤一：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建1.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;步骤二&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建2.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;步骤三&lt;/p&gt;
+
+    &lt;p&gt;将仓库克隆到本地，添加&lt;code class=&quot;highlighter-rouge&quot;&gt;仓库名代码文件夹&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;仓库名.podspec&lt;/code&gt; 描述文件，最好还有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Example&lt;/code&gt;工程.如下&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建3.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;关于.podspec与podfile怎么写，请参考&lt;a href=&quot;https://zhenai.lexiangla.com/teams/k100006/docs/c4a84ab4056811e8840a5254004b6d18&quot;&gt;cocoapods中Podfile和Podspec的简介&lt;/a&gt;,并在Example中本地测试对应的.podspec和Podfile&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;步骤四&lt;/p&gt;
+
+    &lt;p&gt;测试完成后,git上add,commit,push三连，之后在gitlab上可以看到成品如下图&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建4.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;创建版本索引库repo&quot;&gt;创建版本索引库(repo)&lt;/h3&gt;
+
+&lt;p&gt;代码库多了之后， 我们需要一个专门管理所有组件的所有版本的.podspec的仓库&lt;/p&gt;
+
+&lt;p&gt;同创建私有代码库步骤一、步骤二创建版本索引库，复制地址，以__http://gitlab.xxxx.com/ios/XXSpec.git__为例&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;步骤三&lt;/p&gt;
+
+    &lt;p&gt;打开终端，将远程版本索引库添加到本地&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo add XXSpec http://gitlab.xxxx.com/ios/XXSpec.git 
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;成功后输入&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo list
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;可查看&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;podspec推送到版本索引库&quot;&gt;.podspec推送到版本索引库&lt;/h3&gt;
+
+&lt;p&gt;打开终端cd到本地代码库输入，将本地代码库的.podspec推送到版本索引库&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo push XXCommon.podspec --allow-warnings
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功后就能直接通过指令搜索到了&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod search XXCommon
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建5.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Done!&lt;/p&gt;
+</description>
+        <pubDate>Tue, 13 Mar 2018 17:49:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/</guid>
         
         
       </item>
