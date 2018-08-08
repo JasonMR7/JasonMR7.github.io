@@ -100,14 +100,14 @@ end
 
   ```pod 'AFNetworking', :path => '~/Documents/AFNetworking'```
 
-  一般在做独立的库时，库的Example可以直接通过path引用自己的库，如下图中ZACommonExample的Podfile
+  一般在做独立的库时，库的Example可以直接通过path引用自己的库，如下图中XXCommonExample的Podfile
 
   ![alt](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建3.png)
 
   可以这么写：
 
   ```ruby
-  pod 'ZACommon', :path => '../'
+  pod 'XXCommon', :path => '../'
   ```
 
 
@@ -123,7 +123,7 @@ Podfile检索的源，全局的，不存储在某个target定义里面
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-source 'http://gitlab.zhenai.com/ios/ZASpec.git'
+source 'http://gitlab.zhenai.com/ios/XXSpec.git'
 ```
 
 
@@ -285,7 +285,7 @@ s.platform = :ios, '8.0'
 
 依赖的库
 
-作为一个库，有时候需要依赖其他的库，如ZANetworking网络库会依赖AFNetworking，语法和pod差不多，不过后面只能跟版本号，其他依赖网络库的工程通过pod依赖了ZANetworking，下载时会同时把AFNetworking也下载过来
+作为一个库，有时候需要依赖其他的库，如XXNetworking网络库会依赖AFNetworking，语法和pod差不多，不过后面只能跟版本号，其他依赖网络库的工程通过pod依赖了XXNetworking，下载时会同时把AFNetworking也下载过来
 
 ```ruby
 spec.dependency 'AFNetworking', '~> 3.1.0'
@@ -358,7 +358,7 @@ spec.prefix_header_contents = '#import <UIKit/UIKit.h>', '#import <Foundation/Fo
 ```ruby
 s.prefix_header_contents = <<-EOS
  #ifdef __OBJC__
- #import "ZAPrefix.h"    //ZAPrefix包含了所有头文件
+ #import "XXPrefix.h"    //XXPrefix包含了所有头文件
  #endif 
 EOS
 ```
@@ -403,7 +403,7 @@ spec.exclude_files = 'Classes/**/unused.{h,m}'
 依赖的本地三方库路径
 
 ```ruby
-spec.ios.vendored_frameworks = 'ZABaseBusinessModule/Classes/BaseModule/ZMCredit/ZMCreditSDK/*.framework'
+spec.ios.vendored_frameworks = 'XXBaseBusinessModule/Classes/BaseModule/ZMCredit/ZMCreditSDK/*.framework'
 ```
 
 ### vendored_libraries
@@ -419,7 +419,7 @@ spec.ios.vendored_libraries = 'Libraries/libProj4.a'
 资源文件，比如图片，音频视频等
 
 ```ruby
-s.resources = 'ZABaseBusinessModule/Resources/**/*'
+s.resources = 'XXBaseBusinessModule/Resources/**/*'
 ```
 
 值得注意的是，通过pods导入的资源将不在MainBundle下，所有资源会生成在一个新的Bundle下
