@@ -3,14 +3,894 @@
   <channel>
     <title>Jason Ruan</title>
     <description>愿我能拥有一个有趣的灵魂.</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 03 Aug 2018 10:43:48 +0800</pubDate>
-    <lastBuildDate>Fri, 03 Aug 2018 10:43:48 +0800</lastBuildDate>
-    <generator>Jekyll v3.4.0</generator>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 27 Jun 2021 15:19:37 +0800</pubDate>
+    <lastBuildDate>Sun, 27 Jun 2021 15:19:37 +0800</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
     
       <item>
-        <title>UITableView将指定位置滚动至Window键盘上方 - JasonMR7</title>
+        <title>Swfit中description和debugDescription的一个特性</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+&lt;p&gt;在Swift开发过程中遇到了这样一个现象：
+一个类型同时实现了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomStringConvertible和CustomDebugStringConvertible&lt;/code&gt;，输出时作为一个整体和作为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct、enum、tuple&lt;/code&gt;的参数是不同的，具体如下&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyParameters&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyEnum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;MyParameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyParameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomStringConvertible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomDebugStringConvertible&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Parameters&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;debugDescription&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;DebugParameters&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;param&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyParameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myEnum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MyEnum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myEnum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;display()&lt;/code&gt;的结果为&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;DebugParameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Parameters&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;同理转化为String也是这样&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;paramString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myEnum&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Parameters&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;myEnumString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myEnum&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// x(DebugParameters)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;为什么会出现这个现象呢？&lt;/p&gt;
+
+&lt;h1 id=&quot;解析&quot;&gt;解析&lt;/h1&gt;
+&lt;p&gt;通过断点观察两个不同的堆栈
+&lt;strong&gt;作为整体：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2020-10-12-Swfit中description和debugDescription的一个特性/整体.png&quot; alt=&quot;整体&quot; title=&quot;整体&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;print_unlocked&amp;lt;A, B&amp;gt;(:_:) ()&lt;/code&gt;直接输出&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;作为struct、enum、tuple的参数：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2020-10-12-Swfit中description和debugDescription的一个特性/参数.png&quot; alt=&quot;参数&quot; title=&quot;参数&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;print_unlocked&amp;lt;A, B&amp;gt;(:&lt;/em&gt;:) ()&lt;/li&gt;
+  &lt;li&gt;_adHocPrint_unlocked&amp;lt;A, B&amp;gt;(:::isDebugPrint:) ()&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;debugPrint_unlocked&amp;lt;A, B&amp;gt;(:&lt;/em&gt;:) ()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通过上述关键字我们可以找到&lt;a href=&quot;https://github.com/apple/swift/blob/main/stdlib/public/core/OutputStream.swift&quot;&gt;源码&lt;/a&gt;，看一下实现&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;internal&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_print_unlocked&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TargetStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TextOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;inout&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TargetStream&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_openExistential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_isOptional&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;debugPrintable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as!&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomDebugStringConvertible&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;debugPrintable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debugDescription&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;streamableObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TextOutputStreamable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;streamableObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;printableObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomStringConvertible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printableObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;debugPrintableObject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomDebugStringConvertible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;debugPrintableObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debugDescription&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mirror&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Mirror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;reflecting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;_adHocPrint_unlocked&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mirror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isDebugPrint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;显然，当我们直接输出MyParameters时，它是满足CustomStringConvertible协议的，优先取description，符合预期&lt;/p&gt;
+
+&lt;p&gt;但当MyParameters作为MyEnum的参数时
+同时MyEnum&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;不是optional&lt;/li&gt;
+  &lt;li&gt;不是String&lt;/li&gt;
+  &lt;li&gt;没有满足TextOutputStreamable&lt;/li&gt;
+  &lt;li&gt;没有满足CustomStringConvertible&lt;/li&gt;
+  &lt;li&gt;没有满足CustomDebugStringConvertible
+就会进入到_adHocPrint_unlocked&amp;lt;A, B&amp;gt;(:::isDebugPrint:) ()中&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_adHocPrint_unlocked&lt;/code&gt;中通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mirror&lt;/code&gt;判断类型&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;如果是optional，则判断是否为空，如果空则输出nil，否则进入到_debugPrint_unlocked&lt;/li&gt;
+  &lt;li&gt;如果是tuple、struct，则处理一下输出格式，遍历取值进入到_debugPrint_unlocked&lt;/li&gt;
+  &lt;li&gt;如果是enum，则取值进入到_debugPrint_unlocked&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_debugPrint_unlocked&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TargetStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TextOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;inout&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TargetStream&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;debugPrintableObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomDebugStringConvertible&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;debugPrintableObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debugDescription&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;printableObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CustomStringConvertible&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printableObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;streamableObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TextOutputStreamable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;streamableObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mirror&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Mirror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;reflecting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;_adHocPrint_unlocked&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mirror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isDebugPrint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最终都会进入到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_debugPrint_unlocked&lt;/code&gt;
+而&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_debugPrint_unlocked&lt;/code&gt;中判断&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomDebugStringConvertible&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomStringConvertible&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TextOutputStreamable&lt;/code&gt;，如果都不满足则生成新的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mirror&lt;/code&gt;再次进到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_adHocPrint_unlocked&lt;/code&gt;中&lt;/p&gt;
+
+&lt;p&gt;而&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_debugPrint_unlocked&lt;/code&gt;中判断&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomDebugStringConvertible&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomStringConvertible&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TextOutputStreamable&lt;/code&gt;的优先级和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_print_unlocked&lt;/code&gt;是相反的，即优先取&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;debugDescription&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这也是为什么当一个类型同时实现了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomDebugStringConvertible&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CustomStringConvertible&lt;/code&gt;时，作为一个整体和作为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct、enum、tuple&lt;/code&gt;的一部分表现是不同的&lt;/p&gt;
+</description>
+        <pubDate>Mon, 12 Oct 2020 17:49:00 +0800</pubDate>
+        <link>/2020/10/Swfit%E4%B8%ADdescription%E5%92%8CdebugDescription%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</link>
+        <guid isPermaLink="true">/2020/10/Swfit%E4%B8%ADdescription%E5%92%8CdebugDescription%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>脱壳与反编译</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+
+&lt;p&gt;在一些较为重要的页面，为了保障用户的体验，想要记录这些页面在滑动时的流畅度(FPS)，达到及时预警的作用。怎么做呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/疑问.jpeg&quot; alt=&quot;页面滑动时FPS记录&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;正文&quot;&gt;正文&lt;/h1&gt;
+
+&lt;p&gt;要记录FPS，首先想到的就是CADisplayLink&lt;/p&gt;
+
+&lt;h3 id=&quot;cadisplaylink&quot;&gt;CADisplayLink&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CADisplayLink&lt;/code&gt;是一个能让我们以和屏幕刷新率相同的频率将内容画到屏幕上的定时器。我们在应用中创建一个新的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CADisplayLink&lt;/code&gt; 对象，把它添加到一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;runloop&lt;/code&gt;中，并给它提供一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; 和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;selector&lt;/code&gt; 在屏幕刷新的时候调用。&lt;/p&gt;
+
+&lt;h2 id=&quot;场景一&quot;&gt;场景一：&lt;/h2&gt;
+
+&lt;p&gt;我们先处理一种较为简单的场景一：不管是不是滑动，如何利用CADisplayLink，记录FPS&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;// 初始化CADisplayLink
+_link = [CADisplayLink displayLinkWithTarget:[YYWeakProxy proxyWithTarget:self] selector:@selector(displayLinkAction:)];
+[_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;- (void)displayLinkAction:(CADisplayLink *)link {
+    static NSTimeInterval lastTime = 0;
+    static int frameCount = 0;
+    if (lastTime == 0) { lastTime = link.timestamp; return; }
+    frameCount++; // 累计帧数
+    NSTimeInterval passTime = link.timestamp - lastTime;// 累计时间
+    if (passTime &amp;gt; 0.5) { // 0.5秒左右获取一次帧数
+        int fps = frameCount / passTime; // 帧数 = 总帧数 / 时间
+        lastTime = link.timestamp; // 重置
+        frameCount = 0; // 重置
+        if (fps &amp;gt; 0) {
+            // 这里记录FPS
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，页面不管是静止还是滑动，每0.5秒都会记录一次FPS。&lt;/p&gt;
+
+&lt;p&gt;但是由于页面静止的时候FPS一直会是60，这样的数据显然是没有什么参考意义的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/肥肠忧伤.jpg&quot; alt=&quot;页面滑动时FPS记录&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;不要忧伤，离我们的目标已经非常接近了。&lt;/p&gt;
+
+&lt;h2 id=&quot;场景二&quot;&gt;场景二：&lt;/h2&gt;
+
+&lt;p&gt;接下来我们处理场景二：只在滑动的时候记录FPS&lt;/p&gt;
+
+&lt;p&gt;其实也很简单，初始化方法还是不变，只需要在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;displayLinkAction:&lt;/code&gt;方法中加个currentMode的判断即可&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;- (void)displayLinkAction:(CADisplayLink *)link {
+    static NSTimeInterval lastTime = 0;
+    static int frameCount = 0;
+    if (lastTime == 0) { lastTime = link.timestamp; return; }
+    // runLoop是否在滑动Mode
+    if ([NSRunLoop mainRunLoop].currentMode == UITrackingRunLoopMode) {
+        // UITrackingRunLoopMode，页面正在滑动，记录FPS
+        frameCount++; // 累计帧数
+        NSTimeInterval passTime = link.timestamp - lastTime;// 累计时间
+        if (passTime &amp;gt; 0.5) { // 0.5秒左右获取一次帧数
+            int fps = frameCount / passTime; // 帧数 = 总帧数 / 时间
+            lastTime = link.timestamp; // 重置
+            frameCount = 0; // 重置
+            if (fps &amp;gt; 0) {
+                // 记录FPS
+            }
+        }
+    } else {
+        // NSDefaultRunLoopMode，页面静止，重置数据，不记录FPS
+        lastTime = link.timestamp; // 重置
+        frameCount = 0; // 重置
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;另外&quot;&gt;另外&lt;/h2&gt;
+
+&lt;p&gt;CADisplayLink不用的时候记得销毁哦&lt;/p&gt;
+
+&lt;h1 id=&quot;参考文献&quot;&gt;参考文献&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/c35a81c3b9eb&quot;&gt;CADisplayLink&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/yehot/YYFPSLabel&quot;&gt;YYFPSLabel&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 12 Mar 2019 17:49:00 +0800</pubDate>
+        <link>/2019/03/%E9%A1%B5%E9%9D%A2%E6%BB%91%E5%8A%A8%E6%97%B6FPS%E8%AE%B0%E5%BD%95/</link>
+        <guid isPermaLink="true">/2019/03/%E9%A1%B5%E9%9D%A2%E6%BB%91%E5%8A%A8%E6%97%B6FPS%E8%AE%B0%E5%BD%95/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>weak属性释放监听</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+
+&lt;p&gt;有这样一种情况，A实例有一个weak属性B，当B被释放的时候A想要知道，怎么做？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/还有这种操作.jpg&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;正文&quot;&gt;正文&lt;/h1&gt;
+
+&lt;h2 id=&quot;问题具象化&quot;&gt;问题具象化&lt;/h2&gt;
+
+&lt;p&gt;啥意思呢，画个图展现一下我的绘画水平：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-03-08-weak属性释放监听/A与B.png&quot; alt=&quot;weak属性释放监听&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;把场景代码化：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rabbit类&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-03-08-weak属性释放监听/rabbit.png&quot; alt=&quot;weak属性释放监听&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;场景&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-03-08-weak属性释放监听/场景.png&quot; alt=&quot;weak属性释放监听&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;即5秒后，rabbit实例如何知道carrot没了？肯定有人会说在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[carrot removeFromSuperview];&lt;/code&gt;后面通知一下rabbit不就完了吗？&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;这里我们假设我们对这里这段carrot的代码是无法感知的&lt;/li&gt;
+  &lt;li&gt;假如有很多地方强引用了carrot，也不能确定是什么时候释放掉的&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;处理方法&quot;&gt;处理方法&lt;/h2&gt;
+
+&lt;p&gt;在carrot的set方法中通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;objc_setAssociatedObject&lt;/code&gt;强引用一个carrotTag实例，carrotTag强引用一个block，在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;- (void)dealloc &lt;/code&gt;中调用。&lt;/p&gt;
+
+&lt;p&gt;这样，当carrot销毁时-&amp;gt;carrotTag也会销毁-»carrotTag调用dealloc-&amp;gt;carrotTag调用block-&amp;gt;block通知rabbit&lt;/p&gt;
+
+&lt;p&gt;再表演一下我的绘画水平：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-03-08-weak属性释放监听/ABC.png&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;代码化：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-03-08-weak属性释放监听/解决方法.png&quot; alt=&quot;weak属性释放监听&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;运行，5秒后输出&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;**2019-03-08 18:11:01.111454+0800 test[33193:427107] delegate dealloc**&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;成功！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/woow.jpg&quot; alt=&quot;weak属性释放监听&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;参考文献&quot;&gt;参考文献&lt;/h1&gt;
+
+&lt;p&gt;无&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Mar 2019 17:49:00 +0800</pubDate>
+        <link>/2019/03/weak%E5%B1%9E%E6%80%A7%E9%87%8A%E6%94%BE%E7%9B%91%E5%90%AC/</link>
+        <guid isPermaLink="true">/2019/03/weak%E5%B1%9E%E6%80%A7%E9%87%8A%E6%94%BE%E7%9B%91%E5%90%AC/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>脱壳与反编译</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+
+&lt;p&gt;很多情况我们可能需要逆向某个App，比如&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;嵌入代码，做点小动作&lt;/li&gt;
+  &lt;li&gt;参考一下别的App的一些UI实现、是否用到某些framework等&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但是从app-store下载的ipa(&lt;a href=&quot;https://www.jianshu.com/p/fdb50d303ad6&quot;&gt;下载方法看这里&lt;/a&gt;)都是经过加密的，需要脱壳。&lt;/p&gt;
+
+&lt;p&gt;用指令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;otool -l &amp;lt;可执行文件&amp;gt; | grep cry&lt;/code&gt; 查看里面的二进制可见cryptid为1，表示已经加密。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cryptoff 16384
+cryptsize 45072384
+cryptid 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;当然了，脱壳过的的ipa包可以通过三方平台下载，确实省去了一些麻烦，但是往往版本会比较旧。那么这时候，就需要自己动手脱壳啦。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/啊行了行了.gif&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;正文&quot;&gt;正文&lt;/h1&gt;
+
+&lt;h2 id=&quot;脱壳&quot;&gt;脱壳&lt;/h2&gt;
+
+&lt;h3 id=&quot;准备&quot;&gt;准备&lt;/h3&gt;
+
+&lt;p&gt;首先你需要：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;已越狱手机&lt;/li&gt;
+  &lt;li&gt;ipa文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果没有越狱手机只能自己去越狱了，这个我没有办法，Skr。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/Skr.jpg&quot; alt=&quot;应脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;开始&quot;&gt;开始&lt;/h3&gt;
+
+&lt;h4 id=&quot;iphone端&quot;&gt;iPhone端&lt;/h4&gt;
+
+&lt;p&gt;打开Cydia，添加源 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://build.frida.re&lt;/code&gt;，安装frida&lt;/p&gt;
+
+&lt;h5 id=&quot;坑&quot;&gt;坑：&lt;/h5&gt;
+
+&lt;p&gt;Cydia如果没有网络，需要翻墙&lt;/p&gt;
+
+&lt;h4 id=&quot;mac-端&quot;&gt;Mac 端&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mac安装 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;frida: sudo pip install frida&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Mac安装frida-ios-dump:&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;从Github下载工程：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo mkdir /opt/dump &amp;amp;&amp;amp; cd /opt/dump &amp;amp;&amp;amp; sudo git clone https://github.com/AloneMonkey/frida-ios-dump&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;安装依赖：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo pip install -r /opt/dump/frida-ios-dump/requirements.txt --upgrade&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;完善手机root用户密码&lt;/p&gt;
+
+        &lt;p&gt;如果你修改过手机的root密码，&lt;strong&gt;没有则跳过此步&lt;/strong&gt;，因为默认密码就是alpine&lt;/p&gt;
+
+        &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo vim /opt/dump/frida-ios-dump/dump.py&lt;/code&gt;，找到Password修改&lt;/p&gt;
+
+        &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'root'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'alpine'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'localhost'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2222&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;设置别名：
+在终端输入：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim ~/.bash_profile&lt;/code&gt; (根据终端类型更改，比如我是zsh，那就是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim ~/.zshrc&lt;/code&gt;)
+在末尾新增下面一段：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alias dump.py=&quot;/opt/dump/frida-ios-dump/dump.py&quot;&lt;/code&gt;
+使别名生效：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;source ~/.bash_profile&lt;/code&gt; (同理终端类型)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Mac终端运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;iproxy 2222 22&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;查看手机上安装的App和对应的bundle ID: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dump.py -l&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;新建一个终端运行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dump.py [Display name] &lt;/code&gt; 或者 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dump.py [Bundle identifier]&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+
+    &lt;p&gt;等待一段时间后，在当前终端目录会生成一个ipa文件，后缀改成zip解压，找到里面的同名Mach-O格式的可执行文件 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;otool -l &amp;lt;可执行文件&amp;gt; | grep cry&lt;/code&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cryptoff 16384
+cryptsize 45072384
+cryptid 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;cryptid为0就表示已经脱壳，开心，快乐~&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/快乐.jpg&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;反编译&quot;&gt;反编译&lt;/h2&gt;
+
+&lt;h3 id=&quot;准备-1&quot;&gt;准备&lt;/h3&gt;
+
+&lt;p&gt;反编译工具Hopper Disassembler工具，&lt;a href=&quot;https://www.hopperapp.com&quot;&gt;官网下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;当然啦也有破解的，嘻嘻&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/否认三连.jpeg&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;开始-1&quot;&gt;开始&lt;/h3&gt;
+
+&lt;h4 id=&quot;打开可执行文件&quot;&gt;打开可执行文件&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Hopper Disassembler&lt;/li&gt;
+  &lt;li&gt;File-&amp;gt;Read Executable to Disassembler&lt;/li&gt;
+  &lt;li&gt;选取同名Mach-O格式的可执行文件&lt;/li&gt;
+  &lt;li&gt;点击OK&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-02-26-脱壳与反编译/HopperDisassembler.png&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;使用&quot;&gt;使用&lt;/h4&gt;
+
+&lt;p&gt;Hopper Disassembler为我们解析出来大部分的方法名，接下来就要靠我们自己通过搜索找方法&lt;/p&gt;
+
+&lt;p&gt;如果你要查看App是否用到了某个framwork，可以直接搜索，一目了然&lt;/p&gt;
+
+&lt;p&gt;如果你想要Hook代码，就要靠自己大概的猜出需要Hook的关键代码，然后自己取生成.dylib嵌入到可执行文件即可，关于如何生成.dylib并注入可以参考&lt;a href=&quot;https://jasonmr7.github.io/2019/01/应用重签名与代码嵌入(2)&quot;&gt;应用重签名与代码嵌入(2)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;嘿嘿~&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/有趣.jpg&quot; alt=&quot;脱壳与反编译&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;参考文献&quot;&gt;参考文献&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/freeWayWalker/article/details/80939199&quot;&gt;【iOS逆向】iOS越狱砸壳流程&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://bbs.pediy.com/thread-225282.htm&quot;&gt;iOS 11上的破解入门教程&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 26 Feb 2019 17:49:00 +0800</pubDate>
+        <link>/2019/02/%E8%84%B1%E5%A3%B3%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91/</link>
+        <guid isPermaLink="true">/2019/02/%E8%84%B1%E5%A3%B3%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>应用重签名与代码嵌入(2)</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+
+&lt;p&gt;上一节我们介绍了如何将自己的ad-hoc包通过企业证书重签名的方式改为企业包，这一节我们将介绍如何将别人的App重签名+dylib注入，动态嵌入代码。&lt;/p&gt;
+
+&lt;p&gt;这里我们分别讲两种场景：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;注入Reveal的动态库查看其它App视图结构&lt;/li&gt;
+  &lt;li&gt;注入自己写的.dylib，通过rumtime篡改其它App的信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以上两种情况手机都&lt;strong&gt;不需要越狱&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/盯.jpg&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;准备阶段&quot;&gt;准备阶段&lt;/h1&gt;
+
+&lt;p&gt;首先你需要：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;企业账号&lt;/li&gt;
+  &lt;li&gt;证书、Identifiers以及对应的Provisioning Profiles&lt;/li&gt;
+  &lt;li&gt;破壳的ipa包&lt;/li&gt;
+  &lt;li&gt;需要注入的.dylib文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;注：从app-store下载的app(&lt;a href=&quot;https://www.jianshu.com/p/fdb50d303ad6&quot;&gt;下载方法看这里&lt;/a&gt;)都是经过加密的，及时重签名后点击也会闪退，需要脱壳，具体脱壳的方法可以自行查阅，或者&lt;a href=&quot;https://jasonmr7.github.io/2019/02/脱壳与反编译/&quot;&gt;戳这里&lt;/a&gt;。当然了，脱壳的ipa包可以通过三方平台下载，省去了自己破壳的麻烦。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/开始装逼.jpg&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;正文&quot;&gt;正文&lt;/h1&gt;
+
+&lt;h2 id=&quot;注入reveal的动态库查看其它app视图结构&quot;&gt;注入Reveal的动态库查看其它App视图结构&lt;/h2&gt;
+
+&lt;p&gt;要用Reveal直接查看其他App的视图结构是查看不了的，如果要查看的话需要越狱手机，但其实还有一个方法就是dylib注入，下面我们将介绍这个方法&lt;/p&gt;
+
+&lt;p&gt;步骤1.2.3.4.8.9.10和上一节相同&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;重命名xxx.ipa为xxx.zip，然后解压，得到Payload文件夹，里面有一个.app文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;进入右键.app文件显示报内容，找到同名的Mach-O格式的可执行文件，用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; otool -l &amp;lt;xxx&amp;gt; | grep crypt&lt;/code&gt;命令查看.app文件的加密状态，cryptid为0是未加密的，则是可用的，否则得砸壳解密，否则即使装上也会闪退&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;进入.app，找到主工程的info.plist，修改Bundle identifier为你自己的Identifiers&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Plugins文件里是各种插件，Push Service、Widget等，如果不需要这些功能可以直接删掉整个Plugins文件夹，Watch文件夹同理&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先要拿到需要注入的libReveal.dylib文件，打开Reveal-&amp;gt;Help-&amp;gt;Show Reveal Library in Finder-&amp;gt;iOS Library，如果有libReveal.dylib就复制到.app目录下，如果只有RevealServer.framework，则双击打开，并将RevealServer复制到.app目录下然后重命名为libReveal.dylib&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;利用codesign重签名dylib&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;codesign -f -s &amp;lt;&quot;证书&quot;&amp;gt; &amp;lt;dylib文件&amp;gt;&lt;/code&gt;，证书可以用指令&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;security find-identity -p codesigning&lt;/code&gt;查看，格式为”iPhone Distribution: abc Co.,Ltd.”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;cd到.app目录下，用&lt;a href=&quot;https://github.com/KJCracks/yololib&quot;&gt;yololib工具&lt;/a&gt;将dylib注入到可执行文件中&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yololib &amp;lt;可执行文件&amp;gt; &amp;lt;需注入的dylib&amp;gt;&lt;/code&gt;，怎么看可执行文件是否导入了对应的dylib动态库呢？利用&lt;a href=&quot;https://sourceforge.net/projects/machoview/&quot;&gt;MachOView&lt;/a&gt;打开对应的可执行文件：Fat Binary-&amp;gt;Executable-&amp;gt;Load Commands中，查看是否有对应的动态库，如下图的libReveal.dylib和LocationFaker.dylib就是刚注入的动态库&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-01-17-应用重签名与代码嵌入/动态库嵌入二进制.png&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将.app转为.ipa，有很多方法，也可以用以下脚本&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; xxx
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;xxx
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;xxx/Payload
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; xxx.app xxx/Payload/xxx.app
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;Icon.png xxx/iTunesArtwork
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;xxx
+zip &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; xxx.ipa Payload iTunesArtwork
+   
+&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;接下来就是重签名了，重签利用的是系统命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin/codesign&lt;/code&gt;。一个 ipa 中，需要重签的有：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dylib&lt;/code&gt;， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;so&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vis&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pvr&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;framework&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;appex&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app&lt;/code&gt;。基本上可以归为两类：Framework 二进制和 app 二进制，Fastlane的resign已经对codesign做了封装，我们可以直接调用Fastlane重签名，可以看官方&lt;a href=&quot;https://docs.fastlane.tools/actions/resign/&quot;&gt;docs&lt;/a&gt;，不过要注意的是Fastlane只会对.app/Frameworks文件夹下的framework二进制重签名，如果在其他目录下的framework文件得手动用codesign签名&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后会得到一个重签名后的.ipa包，用ideviceinstaller工具安装即可，如下图，可以用Reveal展示其视图结构&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-01-17-应用重签名与代码嵌入/Reveal嵌入应用.png&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;注入自己写的dylib通过rumtime篡改其它app的信息&quot;&gt;注入自己写的.dylib，通过rumtime篡改其它App的信息&lt;/h2&gt;
+
+&lt;p&gt;微信抢红包、pokemon-go的手动遥感走地图都是通过这种方式，下面我们介绍一下通过按键更改经纬度在地图上移动的方法，首先我们要生成.dylib&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;安装 iOSOpenDev, 你可能会遇到各种各样的错误，记得 Google&lt;/li&gt;
+  &lt;li&gt;打开Xcode选择iOSOpenDev的Action Menu Plugin，然后就可以通过runtime搞事了，这里有&lt;a href=&quot;https://github.com/JasonMR7/FakeLocation&quot;&gt;源码&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;然后build一下就可以拿到.dylib文件啦，如果你不需要改变什么代码Xcode都不需要打开，直接去&lt;a href=&quot;https://github.com/JasonMR7/FakeLocation&quot;&gt;源码&lt;/a&gt;里拿FakeLocation.dylib文件&lt;/li&gt;
+  &lt;li&gt;最后跟上面注入Reveal的动态库一样，进行1~10步骤即可&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2019-01-17-应用重签名与代码嵌入/手柄地图.gif&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;参考文献&quot;&gt;参考文献&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.iosugar.com/2017/04/17/Practice-articles-iOS-application-re-signature-next/&quot;&gt;实践篇：iOS 应用重签名 (下)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://support.revealapp.com/discussions/questions/59651-where-is-librevealdylib-in-20-version&quot;&gt;Reveal Support&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/rpplusplus/PokemonHook&quot;&gt;PokemonHook&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 17 Jan 2019 18:49:00 +0800</pubDate>
+        <link>/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(2)/</link>
+        <guid isPermaLink="true">/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(2)/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>应用重签名与代码嵌入(1)</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+
+&lt;p&gt;什么时候会需要用到重签名呢？&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将ad-hoc的App包通过企业证书重签名的方式改为enterprise，突破设备限制，提供测试&lt;/li&gt;
+  &lt;li&gt;将enterprise的App包通过其他企业的证书重签名做私有化部署&lt;/li&gt;
+  &lt;li&gt;将app-store的App(免费、付费)包通过重签名的方式装到设备中使用(行为上不大好)&lt;/li&gt;
+  &lt;li&gt;将app-store的App包通过重签名+dylib注入，动态嵌入代码，装到设备中使用(行为上不大好)
+……&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/别带坏我了.jpg&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;本章主要讲第1、2种情况，以1为例，并为3，4种情况做铺垫&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;准备阶段&quot;&gt;准备阶段&lt;/h2&gt;
+
+&lt;p&gt;首先你需要：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;企业账号&lt;/li&gt;
+  &lt;li&gt;证书、Identifiers以及对应的Provisioning Profiles&lt;/li&gt;
+  &lt;li&gt;ad-hoc的ipa包&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;正文&quot;&gt;正文&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;重命名xxx.ipa为xxx.zip，然后解压，得到Payload文件夹，里面有一个.app文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;进入右键.app文件显示报内容，找到同名的Unix 可执行文件，用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; otool -l &amp;lt;xxx&amp;gt; | grep crypt&lt;/code&gt;命令查看.app文件的加密状态，cryptid为0是未加密的，则是可用的，否则得砸壳解密，否则即使装上也会闪退&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;进入.app，找到主工程的info.plist，修改Bundle identifier为你自己的Identifiers&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Plugins文件里是各种插件，Push Service、Widget等，如果不需要这些功能可以直接删掉整个Plugins文件夹，Watch文件夹同理&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将.app转为.ipa，有很多方法，也可以用以下脚本&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; xxx
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;xxx
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;xxx/Payload
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; xxx.app xxx/Payload/xxx.app
+&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;Icon.png xxx/iTunesArtwork
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;xxx
+zip &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; xxx.ipa Payload iTunesArtwork
+   
+&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;接下来就是重签名了，重签利用的是系统命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin/codesign&lt;/code&gt;。一个 ipa 中，需要重签的有：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dylib&lt;/code&gt;， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;so&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vis&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pvr&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;framework&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;appex&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;app&lt;/code&gt;。基本上可以归为两类：Framework 二进制和 app 二进制，Fastlane的resign已经对codesign做了封装，我们可以直接调用Fastlane重签名，可以看官方&lt;a href=&quot;https://docs.fastlane.tools/actions/resign/&quot;&gt;docs&lt;/a&gt;，不过要注意的是Fastlane只会对.app/Frameworks文件夹下的framework二进制重签名，如果在其他目录下的framework文件得手动用codesign签名&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;然后会得到一个重签名后的.ipa包，用ideviceinstaller工具安装即可&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/bingo.gif&quot; alt=&quot;应用重签名与代码嵌入&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;参考文献&quot;&gt;参考文献&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.saitjr.com/ios/fastlane-resign-entitlements.html&quot;&gt;fastlane resign 源码浅析与填坑&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 17 Jan 2019 17:49:00 +0800</pubDate>
+        <link>/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(1)/</link>
+        <guid isPermaLink="true">/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(1)/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>打包脚本持续集成</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;手动打包的的方式有很多弊端：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;需要开发介入，低效&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;打不同条件的包(比如export_method为ad-hoc/enterprise,configuration为Debug,Release,设置版本号为某一特定版本等)设置起来非常麻烦&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;没有统一的界面完成不同App的打包&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;扩展不方便(比如需要加生成二维码手机直接扫码安装的需求)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;寻找并上传符号文件较为麻烦(要寻找哪台机器打的,对应的包符号文件放在哪里)&lt;/p&gt;
+
+    &lt;p&gt;……&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/令人头大鸭.jpeg&quot; alt=&quot;打包脚本简介&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;思路&quot;&gt;思路&lt;/h2&gt;
+
+&lt;p&gt;###Jenkins&lt;/p&gt;
+
+&lt;p&gt;是一款由Java编写的强大开源的持续集成工具，提供了一个打包的环境。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/047ac4c39297&quot;&gt;安装教程点击&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;###Fastlane&lt;/p&gt;
+
+&lt;p&gt;是一款可以帮忙处理很多繁琐的工作(如生成屏幕截图、处理代码签名、发布应用程序等)，适用于iOS和Android的打包工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.fastlane.tools&quot;&gt;Fastlane官网&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;使用好这两款工具就能实现远程脚本打包啦&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/欢呼.gif&quot; alt=&quot;打包脚本简介&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;fastlane使用&quot;&gt;Fastlane使用&lt;/h3&gt;
+
+&lt;p&gt;fastlane的使用跟cocoapods很像&lt;/p&gt;
+
+&lt;p&gt;cd到工程目录执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fastlane init&lt;/code&gt;之后按照提示选择就会生成一个fastlane文件夹，里面有一个Fastfile文件(重点)&lt;/p&gt;
+
+&lt;p&gt;其他文件暂时不需要，可以先删了，然后就是脚本代码部分了，我们直接拿珍爱主站的Fastlane的核心代码做介绍&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;lane&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:adhoc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#初始化工程设置常量&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setUpProjectSettings&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#配置工程&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;setUpProject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:export_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:forceAppVersion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:httpsEnable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#打包&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:branch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;archive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:export_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:httpsEnable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#写入描述文件&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;logInfoToFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#上传iTunes Connect&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:upload2iTunesConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;upload2iTunesConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:upload2iTunesConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看到Fastfile里面生命了一个的adhoc方法，参数为options&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;projectSettings = setUpProjectSettings&lt;/code&gt;为设置打包需要的静态常量，如工程名、target、scheme、provisioning profiles信息等&lt;/li&gt;
+  &lt;li&gt;setUpProject为设置打包需要的全部参数，如export_methods，是否为专业版等，再加上刚刚的静态常量&lt;/li&gt;
+  &lt;li&gt;接下来的archive就是打包方法&lt;/li&gt;
+  &lt;li&gt;logInfoToFile为存储描述文件的方法&lt;/li&gt;
+  &lt;li&gt;upload2iTunesConnect为上传iTunes Connect方法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;非常简单清晰的五步流程，那具体方法在哪里呢，在另一个ruby文件中。&lt;/p&gt;
+
+&lt;p&gt;####为什么不直接写在Fastfile里呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/怎么肥四.jpeg&quot; alt=&quot;打包脚本简介&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因为随着公司的应用不断地增加，但是打包脚本其实都是大同小异，造成如下的现象&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-12-29-打包脚本持续集成/打包action抽象前.png&quot; alt=&quot;打包脚本简介&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了减少重复的代码，以及更容易维护打包代码，故将打包核心Action代码进行抽象，如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-12-29-打包脚本持续集成/打包action抽象后.png&quot; alt=&quot;打包脚本简介&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;各个应用的Fastfile引用该抽象即可&lt;/p&gt;
+
+&lt;h4 id=&quot;抽象方法核心代码介绍&quot;&gt;抽象方法核心代码介绍&lt;/h4&gt;
+
+&lt;h5 id=&quot;初始化工程&quot;&gt;初始化工程&lt;/h5&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Xcodeproj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;targets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;main_target_name&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;standard&quot;&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_configurations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'PRODUCT_BUNDLE_IDENTIFIER'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentIdentifier&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DEVELOPMENT_TEAM'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;developmentTeam&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;elsif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pro_target_name&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;professional&quot;&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_configurations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'PRODUCT_BUNDLE_IDENTIFIER'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentIdentifier&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DEVELOPMENT_TEAM'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;developmentTeam&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个方法就是修改一些工程的文件，比如修改build number，根据export_method修改build settings中的PRODUCT_BUNDLE_IDENTIFIER和DEVELOPMENT_TEAM等&lt;/p&gt;
+
+&lt;h5 id=&quot;打包&quot;&gt;打包&lt;/h5&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;archive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;export_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpsEnable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#将keychains解锁&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;unlock_keychain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;path: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;~/Library/Keychains/login.keychain&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;password: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mac&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;developmentTeam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#根据version和export_method设置描述文件、team_id、symbols，代码略&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;#设置configuration&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Deployment'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;httpsEnable&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Debug'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;export_method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;app-store&quot;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Release'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    
+	&lt;span class=&quot;c1&quot;&gt;#通过gym工具打包&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gym&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;workspace: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;workspace_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;scheme: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#指定项目的scheme名称&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;clean: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;codesigning_identity: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'iPhone Developer'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;configuration: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#指定要打包的配置名&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;export_method: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;export_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#指定打包所使用的输出方式，目前支持app-store, package, ad-hoc, enterprise, development, 和developer-id，即xcodebuild的method参数&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;output_directory: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;store_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;output_name: &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;export_team_id: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;developmentTeam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;include_symbols: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;include_bitcode: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;export_xcargs: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-allowProvisioningUpdates&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;skip_profile_detection: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;export_options: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;ss&quot;&gt;provisioningProfiles: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;profiles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;ss&quot;&gt;uploadBitcode: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;ss&quot;&gt;uploadSymbols: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;ss&quot;&gt;compileBitcode: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;打包用gym工具，具体参数可以参考&lt;a href=&quot;https://docs.fastlane.tools/actions/build_app/#build_app&quot;&gt;Fastlane gym docs&lt;/a&gt;，把参数搞清楚，由于官方推荐用手动签名的方式打包，故profiles要自己根据参数去修改，如果export_method为enterprise和其他的时候，team_id是不一样的，需要注意设置；为了节省ipa的大小，symbols只有在export_method为app-store设置为true即可。值得注意的是codesigning_identity要设置为’iPhone Developer’，不然打包会出问题，当然打出来的包该是Distribution还会是Distribution的。&lt;/p&gt;
+
+&lt;h5 id=&quot;上传&quot;&gt;上传&lt;/h5&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;upload2iTunesConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;fileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projectSettings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;store_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.ipa'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;deliver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;submit_for_review&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#自己填写apple ID#,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;force&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ipa&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:fileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;skip_screenshots&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;skip_metadata&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;precheck_include_in_app_purchases&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上传用deliver工具，具体参数可以参考&lt;a href=&quot;https://docs.fastlane.tools/actions/deliver/#deliver&quot;&gt;Fastlane deliver docs&lt;/a&gt;，相对gym，deliver比较简单&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 29 Dec 2018 17:49:00 +0800</pubDate>
+        <link>/2018/12/%E6%89%93%E5%8C%85%E8%84%9A%E6%9C%AC%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</link>
+        <guid isPermaLink="true">/2018/12/%E6%89%93%E5%8C%85%E8%84%9A%E6%9C%AC%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>UITableView将指定位置滚动至Window键盘上方</title>
         <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
 
 &lt;p&gt;在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-05-11-UITableView根据评论滚动/键盘滚动.gif&quot; alt=&quot;键盘滚动&quot; title=&quot;键盘滚动&quot; /&gt;&lt;/p&gt;
@@ -121,14 +1001,267 @@ CGPoint newGreenOrigin = [blueView convertPoint:greenRect.frame.origin fromView:
 &lt;p&gt;坐标转化的时候头脑要清晰，转来转去别转晕了就好了&lt;/p&gt;
 </description>
         <pubDate>Fri, 11 May 2018 17:49:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/</guid>
+        <link>/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/</link>
+        <guid isPermaLink="true">/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/</guid>
         
         
       </item>
     
       <item>
-        <title>远程私有仓库创建 - JasonMR7</title>
+        <title>如何让Xcode支持模拟器</title>
+        <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;在现有的工程上，不支持模拟器编译，非常难受，原因是自己写的库和一些三方库不支持模拟器编译。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/呕.jpg&quot; alt=&quot;表情包&quot; title=&quot;呕&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;正文&quot;&gt;正文&lt;/h2&gt;
+
+&lt;h3 id=&quot;自己写的静态库解决方案&quot;&gt;自己写的静态库解决方案：&lt;/h3&gt;
+
+&lt;h4 id=&quot;查看支持的架构&quot;&gt;查看支持的架构&lt;/h4&gt;
+
+&lt;p&gt;怎么看自己写的.framework或者.a文件支持了什么架构呢？&lt;/p&gt;
+
+&lt;h5 id=&quot;a文件&quot;&gt;.a文件&lt;/h5&gt;
+
+&lt;p&gt;终端输入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lipo -info xxx.a&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;xxx.a即为.a文件的完整路径&lt;/p&gt;
+
+&lt;h5 id=&quot;framework&quot;&gt;.framework&lt;/h5&gt;
+
+&lt;p&gt;终端输入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lipo -info xxx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;xxx即为.framework下的xxx(双击打开.framework)&lt;/p&gt;
+
+&lt;h4 id=&quot;了解架构&quot;&gt;了解架构&lt;/h4&gt;
+
+&lt;p&gt;执行命令后结果如图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-04-03-如何让Xcode支持模拟器/支持框架查看1.png&quot; alt=&quot;了解架构&quot; title=&quot;支持框架查看1&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;这些个arm是什么意思呢&quot;&gt;这些个arm是什么意思呢？&lt;/h5&gt;
+
+&lt;p&gt;__Arm处理器，因为其低功耗和小尺寸而闻名，几乎所有的手机处理器都基于arm，其在嵌入式系统中的应用非常广泛，它的性能在同等功耗产品中也很出色。&lt;/p&gt;
+
+&lt;p&gt;Armv6、armv7、armv7s、arm64都是arm处理器的指令集，所有指令集原则上都是&lt;strong&gt;向下兼容&lt;/strong&gt;的，如iPhone4S的CPU默认指令集为armv7指令集，但它同时也兼容armv6指令集，只是使用armv6指令集时无法充分发挥其性能，即无法使用armv7指令集中的新特性，同理，iPhone5的处理器标配armv7s指令集，同时也支持armv7指令集，只是无法进行相关的性能优化，从而导致程序的执行效率没那么高。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这些指令集在哪些设备中有用到呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;arm64&lt;/th&gt;
+      &lt;th&gt;armv7s&lt;/th&gt;
+      &lt;th&gt;armv7&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad5&lt;/td&gt;
+      &lt;td&gt;iPhone 5&lt;/td&gt;
+      &lt;td&gt;iPhone 4 - iPhone 4S&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad Air - iPad Air 2&lt;/td&gt;
+      &lt;td&gt;iPhone 5C&lt;/td&gt;
+      &lt;td&gt;iPad - iPad 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad Pro&lt;/td&gt;
+      &lt;td&gt;iPad 4&lt;/td&gt;
+      &lt;td&gt;iPad mini&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iphone 5s - iPhone X&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;iPod Touch 3G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad mini 2&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;iPod Touch4&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-04-03-如何让Xcode支持模拟器/支持框架查看2.png&quot; alt=&quot;了解架构&quot; title=&quot;支持框架查看2&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;那i386x86_64是什么意思呢&quot;&gt;那i386、x86_64是什么意思呢？&lt;/h5&gt;
+
+&lt;p&gt;对应的，则为MAC处理器的指令集，i386、x86_64分别是32位及64位的模拟器需要的架构&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这些指令集在哪些模拟器中有用到呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;x86_64&lt;/th&gt;
+      &lt;th&gt;i386&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad 5&lt;/td&gt;
+      &lt;td&gt;iPad - iPad 4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad Air - iPad Air 2&lt;/td&gt;
+      &lt;td&gt;iPhone 4 - iPhone5C&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad Pro&lt;/td&gt;
+      &lt;td&gt;iPad mini&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iphone5s - iPhoneX&lt;/td&gt;
+      &lt;td&gt;iPod Touch 3G - iPod Touch 4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;iPad mini 2&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;i386是针对intel通用微处理器32位处理器&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;x86_64是针对x86架构的64位处理器&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;模拟器32位处理器测试需要i386架构，&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;模拟器64位处理器测试需要x86_64架构，&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;真机32位处理器需要armv7,或者armv7s架构，&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;真机64位处理器需要arm64架构。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;合并架构&quot;&gt;合并架构&lt;/h4&gt;
+
+&lt;p&gt;重点来了，那如何让自己写的库既能支持真机，又能支持模拟器呢？&lt;/p&gt;
+
+&lt;h5 id=&quot;a文件-1&quot;&gt;.a文件&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Edit Scheme，Build Configuration选Release&lt;/li&gt;
+  &lt;li&gt;选任意模拟器运行，生成支持模拟器运行的.a文件，在Products中找到，show in finder，拿到路径&lt;/li&gt;
+  &lt;li&gt;选Generic iOS Device运行，生成支持真机运行的.a文件，同理拿到路径&lt;/li&gt;
+  &lt;li&gt;打开终端，输入&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lipo &lt;span class=&quot;nt&quot;&gt;-create&lt;/span&gt; 模拟器.a文件路径 真机.a文件路径 &lt;span class=&quot;nt&quot;&gt;-output&lt;/span&gt; 合并.a文件路径
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将.h和.a文件给外部使用即可&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;framwork&quot;&gt;framwork&lt;/h5&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Edit Scheme，Build Configuration选Release&lt;/li&gt;
+  &lt;li&gt;选任意模拟器运行，生成支持模拟器运行的xxx.framwork，在Products中找到，show in finder，再双击点开，拿到里面xxx的路径&lt;/li&gt;
+  &lt;li&gt;选Generic iOS Device运行，生成支持真机运行的xxx.framwork文件，同理拿到xxx的路径&lt;/li&gt;
+  &lt;li&gt;打开终端，输入&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lipo &lt;span class=&quot;nt&quot;&gt;-create&lt;/span&gt; 模拟器xxx文件路径 真机xxx文件路径 &lt;span class=&quot;nt&quot;&gt;-output&lt;/span&gt; 合并xxx文件路径
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;再将合并xxx文件放入任意一个xxx.framwork中给外部使用即可&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;其他三方的静态库解决方案&quot;&gt;其他三方的静态库解决方案&lt;/h3&gt;
+
+&lt;p&gt;这个就比较蛋疼了，&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;查看其最新版是否支持了真机+模拟器，如果是可以考虑更新版本&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;可以联系三方让他们提供出来&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;那我不想更新版本，或者联系他们无果，处理缓慢怎么办？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/悲伤那么大.jpg&quot; alt=&quot;表情包&quot; title=&quot;悲伤那么大&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在模拟器或者真机(一般来说是模拟器)，用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#if !(TARGET_IPHONE_SIMULATOR)&lt;/code&gt;屏蔽对应静态库代码，如何做呢，举个例子&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;#import &quot;ABC.h&quot;
+#import &quot;ViewController.h&quot;
+
+@interface ViewController()
+@property (nonatomic, strong) ABC *abc;
+@end
+    
+@implementation ViewController
+
+- (void)setupABC {
+    _abc = [ABC new];
+}
+    
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上如果ABC不支持模拟器是运行不了的，改为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;#if !(TARGET_IPHONE_SIMULATOR)
+#import &quot;ABC.h&quot;
+#end
+#import &quot;ViewController.h&quot;
+
+@interface ViewController()
+#if !(TARGET_IPHONE_SIMULATOR)
+@property (nonatomic, strong) ABC *abc;
+#end
+@end
+    
+@implementation ViewController
+
+- (void)setupABC {
+    #if !(TARGET_IPHONE_SIMULATOR)
+    _abc = [ABC new];
+    #end
+}
+    
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决了，虽然非常暴力:)&lt;/p&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+
+&lt;p&gt;又能运行模拟器咯&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/表情包/可乐入喉美滋滋.jpg&quot; alt=&quot;表情包&quot; title=&quot;可乐入喉美滋滋&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/567d3b730608&quot;&gt;iOS armv7, armv7s, arm64区别与应用32位、64位配置&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Apr 2018 17:49:00 +0800</pubDate>
+        <link>/2018/04/%E5%A6%82%E4%BD%95%E8%AE%A9Xcode%E6%94%AF%E6%8C%81%E6%A8%A1%E6%8B%9F%E5%99%A8/</link>
+        <guid isPermaLink="true">/2018/04/%E5%A6%82%E4%BD%95%E8%AE%A9Xcode%E6%94%AF%E6%8C%81%E6%A8%A1%E6%8B%9F%E5%99%A8/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>远程私有仓库创建</title>
         <description>&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
 
 &lt;p&gt;对于一些自己写的多复用公用组件，或者一些需要二次修改的多复用第三方组件，而这些代码因为某些原因你又不想公开他们，这时我们可以将代码上传到一个固定的私有仓库，通过cocoapods更好的管理他们。&lt;/p&gt;
@@ -157,7 +1290,7 @@ CGPoint newGreenOrigin = [blueView convertPoint:greenRect.frame.origin fromView:
   &lt;li&gt;
     &lt;p&gt;步骤三&lt;/p&gt;
 
-    &lt;p&gt;将仓库克隆到本地，添加&lt;code class=&quot;highlighter-rouge&quot;&gt;仓库名代码文件夹&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;仓库名.podspec&lt;/code&gt; 描述文件，最好还有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;Example&lt;/code&gt;工程.如下&lt;/p&gt;
+    &lt;p&gt;将仓库克隆到本地，添加&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;仓库名代码文件夹&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;仓库名.podspec&lt;/code&gt; 描述文件，最好还有一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Example&lt;/code&gt;工程.如下&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -187,15 +1320,13 @@ CGPoint newGreenOrigin = [blueView convertPoint:greenRect.frame.origin fromView:
 
     &lt;p&gt;打开终端，将远程版本索引库添加到本地&lt;/p&gt;
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo add XXSpec http://gitlab.xxxx.com/ios/XXSpec.git 
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo add XXSpec http://gitlab.xxxx.com/ios/XXSpec.git 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;p&gt;成功后输入&lt;/p&gt;
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo list
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;p&gt;可查看&lt;/p&gt;
   &lt;/li&gt;
@@ -205,456 +1336,21 @@ CGPoint newGreenOrigin = [blueView convertPoint:greenRect.frame.origin fromView:
 
 &lt;p&gt;打开终端cd到本地代码库输入，将本地代码库的.podspec推送到版本索引库&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo push XXCommon.podspec --allow-warnings
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod repo push XXCommon.podspec &lt;span class=&quot;nt&quot;&gt;--allow-warnings&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;成功后就能直接通过指令搜索到了&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod search XXCommon
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pod search XXCommon
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建5.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Done!&lt;/p&gt;
 </description>
         <pubDate>Tue, 13 Mar 2018 17:49:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>cocoapods中Podfile和Podspec的简介 - JasonMR7</title>
-        <description>&lt;h2 id=&quot;podfile&quot;&gt;Podfile&lt;/h2&gt;
-
-&lt;p&gt;普通的Project，通过cd到根目录，执行&lt;code class=&quot;highlighter-rouge&quot;&gt;pod init&lt;/code&gt;便会生成Podfile文件&lt;/p&gt;
-
-&lt;p&gt;一个简单的Podfile是这样的：&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'test'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'AFNetworking'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'~&amp;gt; 3.1.0'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h2&gt;
-
-&lt;h3 id=&quot;pod&quot;&gt;pod&lt;/h3&gt;
-
-&lt;p&gt;第一行即指定Project中具体的target&lt;/p&gt;
-
-&lt;p&gt;第二行是 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod 'AFNetworking'&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;前一段表示指定依赖的库，这里即为AFNetworking&lt;/p&gt;
-
-&lt;p&gt;后一段&lt;code class=&quot;highlighter-rouge&quot;&gt;3.1.0&lt;/code&gt;即为版本号&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;version&quot;&gt;Version&lt;/h4&gt;
-
-    &lt;p&gt;中间这一段&lt;code class=&quot;highlighter-rouge&quot;&gt;~&amp;gt;&lt;/code&gt;是一个符号，除了&lt;code class=&quot;highlighter-rouge&quot;&gt;~&amp;gt;&lt;/code&gt;其实还有很多，如下&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;= 0.1&lt;/code&gt; 指定版本为0.1&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt; 0.1&lt;/code&gt; 大于 0.1，如果有很多，取最高版本&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;= 0.1&lt;/code&gt; 大于等于 0.1，如果有很多，取最高版本&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt; 0.1&lt;/code&gt; 小于 0.1，如果有很多，取最高版本&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;= 0.1&lt;/code&gt; 小于等于 0.1，如果有很多，取最高版本&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;~&amp;gt; 0.1.2&lt;/code&gt; 大于等于 0.1.2且小于0.2，如果有很多，取最高版本&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;不写 &lt;/code&gt;  始终取最高版本&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;from-a-podspec-in-the-root-of-a-library-repository&quot;&gt;From a podspec in the root of a library repository.&lt;/h4&gt;
-
-    &lt;p&gt;除了版本，还可以通过git的其他方式拉取&lt;/p&gt;
-
-    &lt;p&gt;To use the &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch of the repository:&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'AFNetworking'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/gowalla/AFNetworking.git'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;To use a different branch of the repository:&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'AFNetworking'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/gowalla/AFNetworking.git'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:branch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'dev'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;To use a tag of the repository:&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'AFNetworking'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/gowalla/AFNetworking.git'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.7.0'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;Or specify a commit:&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'AFNetworking'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/gowalla/AFNetworking.git'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:commit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'082f8319af'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;build-configurations&quot;&gt;Build configurations&lt;/h4&gt;
-
-    &lt;p&gt;默认情况下， 依赖项会被安装在所有target的build configuration中。当然指定具体的某个configuration如下&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'PonyDebugger'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:configurations&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Debug'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Beta'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;subspecs&quot;&gt;Subspecs&lt;/h4&gt;
-
-    &lt;p&gt;当你用一个名字装Pod的时候，它将安装所有定义在podspec里面的默认subspec&lt;/p&gt;
-
-    &lt;p&gt;你可以这样指定:&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'QueryKit/Attribute'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;也可以指定一个集合，像下面这样:&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'QueryKit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:subspecs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Attribute'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'QuerySet'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;using-the-files-from-a-local-path&quot;&gt;Using the files from a local path&lt;/h4&gt;
-
-    &lt;p&gt;如果你想要一个自己开发的本地Pod，你可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;path&lt;/code&gt;，如下&lt;/p&gt;
-
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod 'AFNetworking', :path =&amp;gt; '~/Documents/AFNetworking'&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;一般在做独立的库时，库的Example可以直接通过path引用自己的库，如下图中ZACommonExample的Podfile&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2018-03-13-远程私有仓库创建/远程私有仓库创建3.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;可以这么写：&lt;/p&gt;
-
-    &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pod&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ZACommon'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'../'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;sources&quot;&gt;Sources&lt;/h2&gt;
-
-&lt;p&gt;Podfile检索的源，全局的，不存储在某个target定义里面&lt;/p&gt;
-
-&lt;h3 id=&quot;source&quot;&gt;source&lt;/h3&gt;
-
-&lt;p&gt;指定specs的位置，如果有远程私有仓库，比如我们自己的gitlab，需要写上类似如下的源定义，而cocoapods 官方source是隐式的需要的，一旦你指定了其他source 你就需要也把官方的指定上&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/CocoaPods/Specs.git'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://gitlab.zhenai.com/ios/ZASpec.git'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;hooks&quot;&gt;Hooks&lt;/h2&gt;
-
-&lt;p&gt;Podfile提供了钩子用来在安装时被调用&lt;/p&gt;
-
-&lt;p&gt;Hooks也全局的，不存储在某个target定义里面&lt;/p&gt;
-
-&lt;h3 id=&quot;plugin&quot;&gt;plugin&lt;/h3&gt;
-
-&lt;p&gt;使用plugin可以指定某个插件在安装过程中使用&lt;/p&gt;
-
-&lt;p&gt;如，指定用&lt;code class=&quot;highlighter-rouge&quot;&gt;slather&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;cocoapods-keys&lt;/code&gt;插件&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'cocoapods-keys'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:keyring&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Eidolon'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'slather'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;pre_install&quot;&gt;pre_install&lt;/h3&gt;
-
-&lt;p&gt;这个钩子允许你在Pods被下载后但是还未安装前对Pods做一些改变&lt;/p&gt;
-
-&lt;p&gt;例子:&lt;/p&gt;
-
-&lt;p&gt;让cocoapods对静态库支持&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pre_install&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# workaround for https://github.com/CocoaPods/CocoaPods/issues/3289&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;Pod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Installer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Xcode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;TargetValidator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:define_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:verify_no_static_framework_transitive_dependencies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;post_install&quot;&gt;post_install&lt;/h3&gt;
-
-&lt;p&gt;这个钩子允许你在生成的Xcode project写入硬盘或者其他你想执行的操作前做最后的改动&lt;/p&gt;
-
-&lt;p&gt;例子:&lt;/p&gt;
-
-&lt;p&gt;给所有target自定义编译配置&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;post_install&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pods_project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;targets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_configurations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'GCC_ENABLE_OBJC_GC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'supported'&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;podspec&quot;&gt;Podspec&lt;/h2&gt;
-
-&lt;p&gt;如果要自己写一个库，就必须要了解与Podfile相对应的Podspec&lt;/p&gt;
-
-&lt;p&gt;一个Podspec规范描述了库的一个版本，它包含库的名称、版本、说明、要使用的文件等信息&lt;/p&gt;
-
-&lt;p&gt;通过cd到根目录，执行&lt;code class=&quot;highlighter-rouge&quot;&gt;pod spec create [name]&lt;/code&gt;即可生成一个.podspec&lt;/p&gt;
-
-&lt;p&gt;一个简单的Podspec是这样的：&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Pod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Reachability'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;version&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'3.1.0'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;license&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'BSD'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;homepage&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/tonymillion/Reachability'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;authors&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Tony Million'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'tonymillion@gmail.com'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;summary&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ARC and GCD Compatible Reachability Class for iOS and OS X.'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;source&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/tonymillion/Reachability.git'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'v3.1.0'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;source_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Reachability.{h,m}'&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;framework&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'SystemConfiguration'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;root-specification&quot;&gt;Root specification&lt;/h2&gt;
-
-&lt;p&gt;七大必要元素:&lt;/p&gt;
-
-&lt;h3 id=&quot;name&quot;&gt;name&lt;/h3&gt;
-
-&lt;p&gt;库的名字&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;AFNetworking&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;version-1&quot;&gt;version&lt;/h3&gt;
-
-&lt;p&gt;库的版本&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.0.1'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;authors&quot;&gt;authors&lt;/h3&gt;
-
-&lt;p&gt;库的作者&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.0.1'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;license&quot;&gt;license&lt;/h3&gt;
-
-&lt;p&gt;库的证书&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;license&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'MIT'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;homepage&quot;&gt;homepage&lt;/h3&gt;
-
-&lt;p&gt;库的首页&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;homepage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://www.example.com'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;license-1&quot;&gt;license&lt;/h3&gt;
-
-&lt;p&gt;库的源&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:git&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://github.com/AFNetworking/AFNetworking.git'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;ss&quot;&gt;:tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_s&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;summary&quot;&gt;summary&lt;/h3&gt;
-
-&lt;p&gt;库的简述&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;summary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Computes the meaning of life.'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;platform&quot;&gt;Platform&lt;/h2&gt;
-
-&lt;p&gt;库的支持平台&lt;/p&gt;
-
-&lt;p&gt;如iOS，8.0以上&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;platform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:ios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'8.0'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;build-settings&quot;&gt;Build settings&lt;/h2&gt;
-
-&lt;h3 id=&quot;dependency&quot;&gt;dependency&lt;/h3&gt;
-
-&lt;p&gt;依赖的库&lt;/p&gt;
-
-&lt;p&gt;作为一个库，有时候需要依赖其他的库，如ZANetworking网络库会依赖AFNetworking，语法和pod差不多，不过后面只能跟版本号，其他依赖网络库的工程通过pod依赖了ZANetworking，下载时会同时把AFNetworking也下载过来&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;dependency&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'AFNetworking'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'~&amp;gt; 3.1.0'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;requires_arc&quot;&gt;requires_arc&lt;/h3&gt;
-
-&lt;p&gt;指明哪些文件使用ARC。默认是true，表明全部文件都是ARC，或者设置为false，指定所有ARC的文件&lt;/p&gt;
-
-&lt;p&gt;例：&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requires_arc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requires_arc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requires_arc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Classes/Arc'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requires_arc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Classes/*ARC.m'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Classes/ARC.mm'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;对于不是ARC的文件会自动添加&lt;code class=&quot;highlighter-rouge&quot;&gt;-fno-objc-arc&lt;/code&gt; compiler flag&lt;/p&gt;
-
-&lt;h3 id=&quot;frameworks&quot;&gt;frameworks&lt;/h3&gt;
-
-&lt;p&gt;依赖的系统frameworks，多个framework,用逗号分开&lt;/p&gt;
-
-&lt;p&gt;例：&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;frameworks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'QuartzCore'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'CoreData'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;weak_frameworks&quot;&gt;weak_frameworks&lt;/h3&gt;
-
-&lt;p&gt;如果在高版本的OS中调用新增的功能，并且在低版本的OS中依然能够运行,那么就要用到weak_frameworks.如果引用的某些类或者接口在低版本中并不支持，对于不支持的接口，可以在运行的时候判断，这样程序不会出错，如果不weak引用，程序在低版本下启动的时候就会崩溃掉&lt;/p&gt;
-
-&lt;p&gt;例:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;weak_frameworks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Twitter'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'SafariServices'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;libraries&quot;&gt;libraries&lt;/h3&gt;
-
-&lt;p&gt;依赖的系统libraries，多个用逗号分开，去掉lib开头&lt;/p&gt;
-
-&lt;p&gt;例如&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;libraries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'xml2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'z'&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#z表示libz.tdb,后缀不需要,lib开头的省略lib&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;prefix_header_contents&quot;&gt;prefix_header_contents&lt;/h3&gt;
-
-&lt;p&gt;类似于pch，有多个用逗号隔开&lt;/p&gt;
-
-&lt;p&gt;例：&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;prefix_header_contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#import &amp;lt;UIKit/UIKit.h&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#import &amp;lt;Foundation/Foundation.h&amp;gt;'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;prefix_header_contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOS&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
- #ifdef __OBJC__
- #import &quot;ZAPrefix.h&quot;    //ZAPrefix包含了所有头文件
- #endif 
-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOS&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;pod_target_xcconfig&quot;&gt;pod_target_xcconfig&lt;/h3&gt;
-
-&lt;p&gt;表示pod 本身被依赖时，修改的编译选项&lt;/p&gt;
-
-&lt;p&gt;比如framework的路径等&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pod_target_xcconfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'FRAMEWORK_SEARCH_PATHS'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'$(inherited) $(PODS_ROOT)/GTSDK $(PODS_ROOT)/Bugly $(PODS_ROOT)/ksyhttpcache/framework $(PODS_ROOT)/KSYMediaPlayer_iOS/framework/live'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'OTHER_LDFLAGS'&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'$(inherited) -undefined dynamic_lookup -ObjC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;'ENABLE_BITCODE'&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'NO'&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;file-patterns&quot;&gt;File patterns&lt;/h2&gt;
-
-&lt;h3 id=&quot;source_files&quot;&gt;source_files&lt;/h3&gt;
-
-&lt;p&gt;源文件&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;source_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Classes/**/*.{h,m}'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;source_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Classes/**/*.{h,m}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'More_Classes/**/*.{h,m}'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;exclude_files&quot;&gt;exclude_files&lt;/h3&gt;
-
-&lt;p&gt;source_files中指定排除的文件&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exclude_files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Classes/**/unused.{h,m}'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;vendored_frameworks&quot;&gt;vendored_frameworks&lt;/h3&gt;
-
-&lt;p&gt;依赖的本地三方库路径&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vendored_frameworks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ZABaseBusinessModule/Classes/BaseModule/ZMCredit/ZMCreditSDK/*.framework'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;vendored_libraries&quot;&gt;vendored_libraries&lt;/h3&gt;
-
-&lt;p&gt;依赖的本地三方.a文件路径&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;vendored_libraries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Libraries/libProj4.a'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;resource_bundles&quot;&gt;resource_bundles&lt;/h3&gt;
-
-&lt;p&gt;资源文件，比如图片，音频视频等&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ZABaseBusinessModule/Resources/**/*'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;值得注意的是，通过pods导入的资源将不在MainBundle下，所有资源会生成在一个新的Bundle下&lt;/p&gt;
-
-&lt;p&gt;所以取资源的时候需要指定bundle来获取&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;[UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;参考文献&quot;&gt;参考文献&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guides.cocoapods.org/syntax/podfile.html#podfile&quot;&gt;Podfile Syntax Reference&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://guides.cocoapods.org/syntax/podspec.html&quot;&gt;Podspec Syntax Reference&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 29 Jan 2018 23:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/01/cocoapods%E4%B8%ADPodfile%E5%92%8CPodspec%E7%9A%84%E7%AE%80%E4%BB%8B/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/01/cocoapods%E4%B8%ADPodfile%E5%92%8CPodspec%E7%9A%84%E7%AE%80%E4%BB%8B/</guid>
+        <link>/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/</link>
+        <guid isPermaLink="true">/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/</guid>
         
         
       </item>

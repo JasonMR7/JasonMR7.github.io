@@ -1,6 +1,6 @@
 ---
 layout: post
-title: cocoapods中Podfile和Podspec的简介 - JasonMR7
+title: cocoapods中Podfile和Podspec的简介
 date: 2018-01-30 00:00:00.000000000 +09:00
 ---
 

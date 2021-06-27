@@ -24,8 +24,8 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/">
-  <link rel="alternate" type="application/rss+xml" title="Jason Ruan" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="/">
+  <link rel="alternate" type="application/rss+xml" title="Jason Ruan" href="/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
   
@@ -63,8 +63,6 @@
             <nav class="cover-navigation cover-navigation--primary">
               <ul class="navigation">
                 <li class="navigation__item"><a href="/#blog" title="Visit blog" class="blog-button">Blog</a></li>
-                
-                  <li class="navigation__item"><a href="http://project.onevcat.com" target="_blank" title="My Projects">Projects</a></li>
                 
               </ul>
             </nav>
@@ -136,23 +134,72 @@
   <ol class="post-list">
     
     <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/" title="访问 UITableView将指定位置滚动至Window键盘上方 - JasonMR7">UITableView将指定位置滚动至Window键盘上方 - JasonMR7</a></h2>
+      <h2 class="post-list__post-title post-title"><a href="/2020/10/Swfit%E4%B8%ADdescription%E5%92%8CdebugDescription%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/" title="访问 Swfit中description和debugDescription的一个特性">Swfit中description和debugDescription的一个特性</a></h2>
+      <p class="excerpt">背景在Swift开发过程中遇到了这样一个现象：一个类型同时实现了CustomStringConvertible和CustomDebugStringConvertible，输出时作为一个整体和作为struct、enum、tuple的参数是不同的，具体如下struct MyParameters {    let a: String}enum MyEnum {    case x(MyParameters)}extension MyParameters: CustomStringConverti...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2020-10-12 17:49:00 +0800" class="post-list__meta--date date">2020-10-12</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2020/10/Swfit%E4%B8%ADdescription%E5%92%8CdebugDescription%E7%9A%84%E4%B8%80%E4%B8%AA%E5%9D%91/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/03/%E9%A1%B5%E9%9D%A2%E6%BB%91%E5%8A%A8%E6%97%B6FPS%E8%AE%B0%E5%BD%95/" title="访问 脱壳与反编译">脱壳与反编译</a></h2>
+      <p class="excerpt">背景在一些较为重要的页面，为了保障用户的体验，想要记录这些页面在滑动时的流畅度(FPS)，达到及时预警的作用。怎么做呢？正文要记录FPS，首先想到的就是CADisplayLinkCADisplayLinkCADisplayLink是一个能让我们以和屏幕刷新率相同的频率将内容画到屏幕上的定时器。我们在应用中创建一个新的 CADisplayLink 对象，把它添加到一个runloop中，并给它提供一个 target 和selector 在屏幕刷新的时候调用。场景一：我们先处理一种较为简单的场景...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2019-03-12 17:49:00 +0800" class="post-list__meta--date date">2019-03-12</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2019/03/%E9%A1%B5%E9%9D%A2%E6%BB%91%E5%8A%A8%E6%97%B6FPS%E8%AE%B0%E5%BD%95/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/03/weak%E5%B1%9E%E6%80%A7%E9%87%8A%E6%94%BE%E7%9B%91%E5%90%AC/" title="访问 weak属性释放监听">weak属性释放监听</a></h2>
+      <p class="excerpt">背景有这样一种情况，A实例有一个weak属性B，当B被释放的时候A想要知道，怎么做？正文问题具象化啥意思呢，画个图展现一下我的绘画水平：把场景代码化：  Rabbit类      场景      即5秒后，rabbit实例如何知道carrot没了？肯定有人会说在[carrot removeFromSuperview];后面通知一下rabbit不就完了吗？  这里我们假设我们对这里这段carrot的代码是无法感知的  假如有很多地方强引用了carrot，也不能确定是什么时候释放掉的处理方法在...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2019-03-08 17:49:00 +0800" class="post-list__meta--date date">2019-03-08</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2019/03/weak%E5%B1%9E%E6%80%A7%E9%87%8A%E6%94%BE%E7%9B%91%E5%90%AC/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/02/%E8%84%B1%E5%A3%B3%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91/" title="访问 脱壳与反编译">脱壳与反编译</a></h2>
+      <p class="excerpt">背景很多情况我们可能需要逆向某个App，比如  嵌入代码，做点小动作  参考一下别的App的一些UI实现、是否用到某些framework等但是从app-store下载的ipa(下载方法看这里)都是经过加密的，需要脱壳。用指令 otool -l &lt;可执行文件&gt; | grep cry 查看里面的二进制可见cryptid为1，表示已经加密。cryptoff 16384cryptsize 45072384cryptid 1当然了，脱壳过的的ipa包可以通过三方平台下载，确实省去了一些麻...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2019-02-26 17:49:00 +0800" class="post-list__meta--date date">2019-02-26</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2019/02/%E8%84%B1%E5%A3%B3%E4%B8%8E%E5%8F%8D%E7%BC%96%E8%AF%91/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(2)/" title="访问 应用重签名与代码嵌入(2)">应用重签名与代码嵌入(2)</a></h2>
+      <p class="excerpt">背景上一节我们介绍了如何将自己的ad-hoc包通过企业证书重签名的方式改为企业包，这一节我们将介绍如何将别人的App重签名+dylib注入，动态嵌入代码。这里我们分别讲两种场景：  注入Reveal的动态库查看其它App视图结构  注入自己写的.dylib，通过rumtime篡改其它App的信息以上两种情况手机都不需要越狱准备阶段首先你需要：  企业账号  证书、Identifiers以及对应的Provisioning Profiles  破壳的ipa包  需要注入的.dylib文件注：从...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2019-01-17 18:49:00 +0800" class="post-list__meta--date date">2019-01-17</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(2)/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(1)/" title="访问 应用重签名与代码嵌入(1)">应用重签名与代码嵌入(1)</a></h2>
+      <p class="excerpt">背景什么时候会需要用到重签名呢？  将ad-hoc的App包通过企业证书重签名的方式改为enterprise，突破设备限制，提供测试  将enterprise的App包通过其他企业的证书重签名做私有化部署  将app-store的App(免费、付费)包通过重签名的方式装到设备中使用(行为上不大好)  将app-store的App包通过重签名+dylib注入，动态嵌入代码，装到设备中使用(行为上不大好)……本章主要讲第1、2种情况，以1为例，并为3，4种情况做铺垫准备阶段首先你需要：  企业...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2019-01-17 17:49:00 +0800" class="post-list__meta--date date">2019-01-17</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2019/01/%E5%BA%94%E7%94%A8%E9%87%8D%E7%AD%BE%E5%90%8D%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%B5%8C%E5%85%A5(1)/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/12/%E6%89%93%E5%8C%85%E8%84%9A%E6%9C%AC%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" title="访问 打包脚本持续集成">打包脚本持续集成</a></h2>
+      <p class="excerpt">背景手动打包的的方式有很多弊端：      需要开发介入，低效        打不同条件的包(比如export_method为ad-hoc/enterprise,configuration为Debug,Release,设置版本号为某一特定版本等)设置起来非常麻烦        没有统一的界面完成不同App的打包        扩展不方便(比如需要加生成二维码手机直接扫码安装的需求)        寻找并上传符号文件较为麻烦(要寻找哪台机器打的,对应的包符号文件放在哪里)    ……  思路...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2018-12-29 17:49:00 +0800" class="post-list__meta--date date">2018-12-29</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/12/%E6%89%93%E5%8C%85%E8%84%9A%E6%9C%AC%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/" title="访问 UITableView将指定位置滚动至Window键盘上方">UITableView将指定位置滚动至Window键盘上方</a></h2>
       <p class="excerpt">背景在Window上弹起键盘，UITableView需要将指定的位置滚动到键盘上方，如微信朋友圈点击评论时，需要将cell的底部滚动至键盘上方，如下：正文我们首先要解决键盘问题，键盘什么时候开始弹起，弹起多高，动画有多久？键盘的几个事件，了解一下？键盘事件// Each notification includes a nil object and a userInfo dictionary containing the// begining and ending keyboard fram...&hellip;</p>
       <div class="post-list__meta"><time datetime="2018-05-11 17:49:00 +0800" class="post-list__meta--date date">2018-05-11</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/05/UITableView%E6%A0%B9%E6%8D%AE%E8%AF%84%E8%AE%BA%E6%BB%9A%E5%8A%A8/>继续阅读</a></div>
       <hr class="post-list__divider" />
     </li>
     
     <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/" title="访问 远程私有仓库创建 - JasonMR7">远程私有仓库创建 - JasonMR7</a></h2>
-      <p class="excerpt">背景对于一些自己写的多复用公用组件，或者一些需要二次修改的多复用第三方组件，而这些代码因为某些原因你又不想公开他们，这时我们可以将代码上传到一个固定的私有仓库，通过cocoapods更好的管理他们。库的选择可以是oschina、github(￥7/month)、公司自己的git服务器等，本文以gitlab为例正文创建私有代码库进入gitlab创建代码库，如下图  步骤一：  步骤二      步骤三    将仓库克隆到本地，添加仓库名代码文件夹、仓库名.podspec 描述文件，最好还有一...&hellip;</p>
-      <div class="post-list__meta"><time datetime="2018-03-13 17:49:00 +0800" class="post-list__meta--date date">2018-03-13</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/>继续阅读</a></div>
+      <h2 class="post-list__post-title post-title"><a href="/2018/04/%E5%A6%82%E4%BD%95%E8%AE%A9Xcode%E6%94%AF%E6%8C%81%E6%A8%A1%E6%8B%9F%E5%99%A8/" title="访问 如何让Xcode支持模拟器">如何让Xcode支持模拟器</a></h2>
+      <p class="excerpt">背景在现有的工程上，不支持模拟器编译，非常难受，原因是自己写的库和一些三方库不支持模拟器编译。正文自己写的静态库解决方案：查看支持的架构怎么看自己写的.framework或者.a文件支持了什么架构呢？.a文件终端输入lipo -info xxx.axxx.a即为.a文件的完整路径.framework终端输入lipo -info xxxxxx即为.framework下的xxx(双击打开.framework)了解架构执行命令后结果如图：这些个arm是什么意思呢？__Arm处理器，因为其低功耗和...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2018-04-03 17:49:00 +0800" class="post-list__meta--date date">2018-04-03</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/04/%E5%A6%82%E4%BD%95%E8%AE%A9Xcode%E6%94%AF%E6%8C%81%E6%A8%A1%E6%8B%9F%E5%99%A8/>继续阅读</a></div>
       <hr class="post-list__divider" />
     </li>
     
     <li>
-      <h2 class="post-list__post-title post-title"><a href="/2018/01/cocoapods%E4%B8%ADPodfile%E5%92%8CPodspec%E7%9A%84%E7%AE%80%E4%BB%8B/" title="访问 cocoapods中Podfile和Podspec的简介 - JasonMR7">cocoapods中Podfile和Podspec的简介 - JasonMR7</a></h2>
-      <p class="excerpt">Podfile普通的Project，通过cd到根目录，执行pod init便会生成Podfile文件一个简单的Podfile是这样的：target 'test' dopod 'AFNetworking', '~&gt; 3.1.0'endDependenciespod第一行即指定Project中具体的target第二行是 pod 'AFNetworking'前一段表示指定依赖的库，这里即为AFNetworking后一段3.1.0即为版本号      Version    中间这一段~&gt...&hellip;</p>
-      <div class="post-list__meta"><time datetime="2018-01-29 23:00:00 +0800" class="post-list__meta--date date">2018-01-29</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/01/cocoapods%E4%B8%ADPodfile%E5%92%8CPodspec%E7%9A%84%E7%AE%80%E4%BB%8B/>继续阅读</a></div>
+      <h2 class="post-list__post-title post-title"><a href="/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/" title="访问 远程私有仓库创建">远程私有仓库创建</a></h2>
+      <p class="excerpt">背景对于一些自己写的多复用公用组件，或者一些需要二次修改的多复用第三方组件，而这些代码因为某些原因你又不想公开他们，这时我们可以将代码上传到一个固定的私有仓库，通过cocoapods更好的管理他们。库的选择可以是oschina、github(￥7/month)、公司自己的git服务器等，本文以gitlab为例正文创建私有代码库进入gitlab创建代码库，如下图  步骤一：  步骤二      步骤三    将仓库克隆到本地，添加仓库名代码文件夹、仓库名.podspec 描述文件，最好还有一...&hellip;</p>
+      <div class="post-list__meta"><time datetime="2018-03-13 17:49:00 +0800" class="post-list__meta--date date">2018-03-13</time> &#8226; <span class="post-list__meta--tags tags"></span><a class="btn-border-small" href=/2018/03/%E8%BF%9C%E7%A8%8B%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA/>继续阅读</a></div>
       <hr class="post-list__divider" />
     </li>
     
@@ -162,7 +209,9 @@
 
 <nav class="pagination" role="navigation">
     
-    <span class="pagination__page-number">1 / 1</span>
+    <span class="pagination__page-number">1 / 2</span>
+    
+        <a class="older-posts pagination__older btn btn-small btn-tertiary" href="/page/2/#blog">更早 &rarr;</a>
     
 </nav>
 
@@ -172,8 +221,8 @@
             <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2018-08-03 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
-        <span class="footer__copyright">本站由 <a href="JasonMR7.github.io">@Jaosn Ruan</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2018</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2021-06-27 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">本站由 <a href="JasonMR7.github.io">@Jaosn Ruan</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2021</span>
     </footer>
 </section>
 
