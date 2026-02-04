@@ -14,17 +14,23 @@ iOS 18 新增的**锁屏拍摄扩展（Locked Camera Capture Extension）**，�
 
 这一扩展将应用的相机体验延伸至**控制中心、锁屏界面、动作按钮**三大场景，大幅降低用户调用核心相机功能的操作成本，为具备拍摄能力的第三方应用提供了更便捷的用户触达路径。
 
+![锁屏拍摄扩展与 ControlWidget](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera1.webp)
+
 ---
 
 ## 二、前置知识：ControlWidget 详解
 
 要掌握锁屏拍摄扩展，首先需要理解它的「入口载体」——**ControlWidget**。
 
+<video src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera2.mov" controls playsinline></video>
+
 在 iOS 18 中，苹果为控制中心、锁定屏幕开放了更多交互能力，用户无需打开完整应用，就能在这些系统界面直接调用轻量化控件按钮完成核心操作，这类控件按钮就是 **ControlWidget**。
 
 ### 2.1 如何创建 ControlWidget
 
 创建 ControlWidget 需基于 Xcode 操作，采用 **SwiftUI** 实现，核心步骤如下：
+
+![创建 ControlWidget](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera3.webp)
 
 1. 在 Xcode 中为项目添加 Target，选择「**Widget Extension**」；
 2. 定义继承自 `WidgetBundle` 的类，声明要添加的 ControlWidget；
@@ -90,9 +96,10 @@ class ScanManager: ObservableObject {
 }
 ```
 
+
 ### 2.3 效果展示
 
-**【此处插入图片 1】** 图片描述：iOS 设备控制中心 / 锁屏界面截图，清晰标注出自定义的「扫码」ControlWidget 按钮（样式为文字 + 二维码取景框图标），展示控件的最终呈现效果。
+<video src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera4.mov" controls playsinline></video>
 
 运行项目后，即可在设备的控制中心或锁屏界面看到创建的 `ScanControlWidget`，点击即可触发扫码 Intent 并打开主应用。
 
@@ -138,9 +145,17 @@ struct LockedCameraCaptureView: View {
 
 ### 3.3 两种触发效果展示
 
-**【此处插入图片 2】**（锁屏状态触发效果）图片描述：iOS 设备锁屏界面，点击「扫码 / 拍摄」ControlWidget 后，直接进入轻量化拍摄界面（无主应用启动动画），标注出拍摄取景框、快门按钮等核心元素（因锁屏无法录屏，采用高清截图展示）。
+**（锁屏状态触发效果）**
 
-**【此处插入图片 3】**（解锁状态触发效果）图片描述：iOS 设备解锁后的主屏幕 / 控制中心，点击「扫码 / 拍摄」ControlWidget 后，直接启动应用主界面并进入拍摄功能，展示主应用的完整拍摄界面。
+![锁屏状态触发效果](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera5.webp)
+
+iOS 设备锁屏界面，点击「扫码 / 拍摄」ControlWidget 后，直接进入轻量化拍摄界面（无主应用启动动画），标注出拍摄取景框、快门按钮等核心元素。
+
+**（解锁状态触发效果）**
+
+<video src="https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera6.mov" controls playsinline></video>
+
+iOS 设备解锁后的主屏幕 / 控制中心，点击「扫码 / 拍摄」ControlWidget 后，直接启动应用主界面并进入拍摄功能，展示主应用的完整拍摄界面。
 
 完成上述配置后，点击对应的 ControlWidget 会出现两种场景：
 
@@ -207,11 +222,19 @@ session.openApplication(for: NSUserActivity(activityType: NSUserActivityTypeLock
 
 3. 主应用启动后，通过 PhotoKit 读取系统相册中刚存储的拍摄内容，进行后续编辑、上传等操作。
 
-**【此处插入图片 4】**（数据交互流程图）图片描述：采用流程图形式，清晰展示「锁屏拍摄扩展 → PhotoKit 存储 → 解锁打开主应用 → 主应用 PhotoKit 读取」的完整数据流转路径，标注每个步骤的核心操作和依赖框架。
+![数据交互示意](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera7.webp)
+
+![PhotoKit 与主应用衔接](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera8.webp)
+
+![数据流转流程](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera9.webp)
 
 ---
 
 ## 五、思考与展望
+
+![锁屏拍摄扩展场景](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera10.webp)
+
+![ControlWidget 与流量入口](https://github.com/JasonMR7/JasonMR7.github.io/raw/master/assets/images/2024-06-10-iOS-18-锁屏拍摄扩展与-ControlWidget-详解/camera11.webp)
 
 iOS 18 开放控制中心、锁屏首页的控件能力，不仅为用户提供了更便捷的操作体验，更让这两个场景成为第三方 iOS 应用的**全新流量入口**。
 
